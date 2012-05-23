@@ -29,8 +29,11 @@ target_link_libraries(${the_library} ${OpenCV_LIBS})
 #---------------------------------
 # add tests
 #---------------------------------
+if(NOT DEFINED ENABLE_TESTS)
+    set(ENABLE_TESTS FALSE CACHE BOOL "Enable to make the tests")
+endif()
 
-if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test)
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/test AND ENABLE_TESTS)
 	file(GLOB test_srcs "test/*.cpp")
 	file(GLOB test_hdrs "test/*.h*")
 	set(the_test_target "opencv_test_${name}")
